@@ -134,6 +134,13 @@ def main():
             ca = st.number_input("Major Vessels (ca)", min_value=0.0, max_value=4.0)
             thal = st.number_input("Thalassemia (thal)", min_value=1.0, max_value=3.0)
 
+
+            # Validate that the patient name is provided
+            if not name.strip():
+                st.error("❌ Please enter the patient's name.")
+                return
+                
+
             # Match the patient data with the CSV for prediction
             filtered_data = df[(df['age'] == age) &
                                (df['sex'] == (1 if sex == "Male" else 0)) &
