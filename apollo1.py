@@ -119,6 +119,7 @@ def main():
 
             # Patient details
             st.subheader("🏥 Enter Patient Details")
+            name = st.text_input("Patient Name", placeholder="Enter patient's full name") 
             age = st.number_input("Age", min_value=1, max_value=100)
             sex = st.selectbox("Sex", ["Male", "Female"])
             cp = st.number_input("Chest Pain Type (cp)", min_value=0.0, max_value=5.0)
@@ -149,6 +150,7 @@ def main():
 
                     # Store values and generate report image
                     values = {
+                        "Name": name, 
                         "Age": age,
                         "Sex": sex,
                         "Chest Pain Type (cp)": cp,
