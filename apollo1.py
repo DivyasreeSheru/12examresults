@@ -152,7 +152,7 @@ def main():
                 avg_pred = (extra_trees_pred + knn_pred + logistic_regression_pred) / 3
 
                 if st.button("Submit"):
-                    result = "❤️ Heart disease predicted" if avg_pred >= 0.5 else "💪 Person is healthy"
+                    result = "❤️ Heart disease predicted , Please consult a Cardiologist" if avg_pred >= 0.5 else "💪 Person is healthy "
                     st.success(result)
 
                     # Store values and generate report image
