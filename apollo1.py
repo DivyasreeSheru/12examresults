@@ -172,7 +172,7 @@ def main():
                         "Major Vessels (ca)": ca,
                         "Thalassemia (thal)": thal
                     }
-                    report_image = generate_image(values, result, "xyz")
+                    report_image = generate_image(values, result, "ML")
                     st.image(report_image, caption='Heart Disease Prediction Report', use_column_width=True)
             else:
                 st.error("❌ No matching data found for the entered values.")
