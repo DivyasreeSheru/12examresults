@@ -106,78 +106,85 @@ def main():
                 st.experimental_set_query_params(page="Heart Disease Prediction")
                 return
 
-            st.subheader("Upload CSV file for prediction data")
-            uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
+            st.subheader("Upload CSV file for prediction data (first time only)")
 
-            if uploaded_file is not None:
-                try:
-                    df = pd.read_csv(uploaded_file)
-                except Exception as e:
-                    st.error(f"Error reading the file: {e}")
-                    return
+            if "uploaded_file" not in st.session_state:
+                uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
 
-                st.subheader("🏥 Enter Patient Details")
-                name = st.text_input("Patient Name", placeholder="Enter patient's full name") 
-                age = st.number_input("Age", min_value=1, max_value=100)
-                sex = st.selectbox("Sex", ["Male", "Female"])
-                cp = st.number_input("Chest Pain Type (cp)", min_value=0.0, max_value=5.0)
-                trestbps = st.number_input("Resting Blood Pressure (trestbps)", min_value=94.0, max_value=200.0)
-                chol = st.number_input("Serum Cholesterol (chol)", min_value=126.0, max_value=417.0)
-                fbs = st.number_input("Fasting Blood Sugar (fbs)", min_value=0.0, max_value=3.0)
-                restecg = st.number_input("Resting ECG (restecg)", min_value=0.0, max_value=2.0)
-                thalach = st.number_input("Max Heart Rate (thalach)", min_value=71.0, max_value=192.0)
-                exang = st.number_input("Exercise Induced Angina (exang)", min_value=0.0, max_value=1.0)
-                oldpeak = st.number_input("ST Depression (oldpeak)", min_value=0.0, max_value=5.6)
-                slope = st.number_input("Slope of Peak Exercise (slope)", min_value=0.0, max_value=2.0)
-                ca = st.number_input("Major Vessels (ca)", min_value=0.0, max_value=4.0)
-                thal = st.number_input("Thalassemia (thal)", min_value=1.0, max_value=3.0)
-
-                if not name.strip():
-                    st.error("❌ Please enter the patient's name.")
-                    return
-
-                filtered_data = df[(df['age'] == age) & 
-                                   (df['sex'] == (1 if sex == "Male" else 0)) & 
-                                   (df['cp'] == cp)]
-                if not filtered_data.empty:
-                    extra_trees_pred = filtered_data['Extra Trees Pred Target'].values[0]
-                    knn_pred = filtered_data['KNN Pred Target'].values[0]
-                    logistic_regression_pred = filtered_data['Logistic Regression Pred Target'].values[0]
-                    avg_pred = (extra_trees_pred + knn_pred + logistic_regression_pred) / 3
-
-                    if st.button("Submit"):
-                        result = "❤️ Heart disease predicted, Please consult a Cardiologist" if avg_pred >= 0.5 else "💪 Person is healthy "
-                        st.success(result)
-
-                        values = {
-                            "Name": name, 
-                            "Age": age,
-                            "Sex": sex,
-                            "Chest Pain Type (cp)": cp,
-                            "Resting Blood Pressure (trestbps)": trestbps,
-                            "Serum Cholesterol (chol)": chol,
-                            "Fasting Blood Sugar (fbs)": fbs,
-                            "Resting ECG (restecg)": restecg,
-                            "Max Heart Rate (thalach)": thalach,
-                            "Exercise Induced Angina (exang)": exang,
-                            "ST Depression (oldpeak)": oldpeak,
-                            "Slope of Peak Exercise (slope)": slope,
-                            "Major Vessels (ca)": ca,
-                            "Thalassemia (thal)": thal
-                        }
-                        report_image = generate_image(values, result, "ML")
-                        st.image(report_image, caption='Heart Disease Prediction Report', use_column_width=True)
+                if uploaded_file is not None:
+                    try:
+                        df = pd.read_csv(uploaded_file)
+                        st.session_state.df = df  # Store the data in session state
+                        st.session_state.uploaded_file = uploaded_file
+                    except Exception as e:
+                        st.error(f"Error reading the file: {e}")
+                        return
                 else:
-                    st.error("❌ No matching data found for the entered values.")
+                    st.warning("Please upload a CSV file to continue.")
+                    return
+
+            df = st.session_state.df  # Use the data from session state
+
+            st.subheader("🏥 Enter Patient Details")
+            name = st.text_input("Patient Name", placeholder="Enter patient's full name") 
+            age = st.number_input("Age", min_value=1, max_value=100)
+            sex = st.selectbox("Sex", ["Male", "Female"])
+            cp = st.number_input("Chest Pain Type (cp)", min_value=0.0, max_value=5.0)
+            trestbps = st.number_input("Resting Blood Pressure (trestbps)", min_value=94.0, max_value=200.0)
+            chol = st.number_input("Serum Cholesterol (chol)", min_value=126.0, max_value=417.0)
+            fbs = st.number_input("Fasting Blood Sugar (fbs)", min_value=0.0, max_value=3.0)
+            restecg = st.number_input("Resting ECG (restecg)", min_value=0.0, max_value=2.0)
+            thalach = st.number_input("Max Heart Rate (thalach)", min_value=71.0, max_value=192.0)
+            exang = st.number_input("Exercise Induced Angina (exang)", min_value=0.0, max_value=1.0)
+            oldpeak = st.number_input("ST Depression (oldpeak)", min_value=0.0, max_value=5.6)
+            slope = st.number_input("Slope of Peak Exercise (slope)", min_value=0.0, max_value=2.0)
+            ca = st.number_input("Major Vessels (ca)", min_value=0.0, max_value=4.0)
+            thal = st.number_input("Thalassemia (thal)", min_value=1.0, max_value=3.0)
+
+            if not name.strip():
+                st.error("❌ Please enter the patient's name.")
+                return
+
+            filtered_data = df[(df['age'] == age) & 
+                               (df['sex'] == (1 if sex == "Male" else 0)) & 
+                               (df['cp'] == cp)]
+            if not filtered_data.empty:
+                extra_trees_pred = filtered_data['Extra Trees Pred Target'].values[0]
+                knn_pred = filtered_data['KNN Pred Target'].values[0]
+                logistic_regression_pred = filtered_data['Logistic Regression Pred Target'].values[0]
+                avg_pred = (extra_trees_pred + knn_pred + logistic_regression_pred) / 3
+
+                if st.button("Submit"):
+                    result = "❤️ Heart disease predicted, Please consult a Cardiologist" if avg_pred >= 0.5 else "💪 Person is healthy "
+                    st.success(result)
+
+                    values = {
+                        "Name": name, 
+                        "Age": age,
+                        "Sex": sex,
+                        "Chest Pain Type (cp)": cp,
+                        "Resting Blood Pressure (trestbps)": trestbps,
+                        "Serum Cholesterol (chol)": chol,
+                        "Fasting Blood Sugar (fbs)": fbs,
+                        "Resting ECG (restecg)": restecg,
+                        "Max Heart Rate (thalach)": thalach,
+                        "Exercise Induced Angina (exang)": exang,
+                        "ST Depression (oldpeak)": oldpeak,
+                        "Slope of Peak Exercise (slope)": slope,
+                        "Major Vessels (ca)": ca,
+                        "Thalassemia (thal)": thal
+                    }
+                    report_image = generate_image(values, result, "ML")
+                    st.image(report_image, caption='Heart Disease Prediction Report', use_column_width=True)
             else:
-                st.warning("Please upload a CSV file to continue.")
+                st.error("❌ No matching data found for the entered values.")
 
     elif option == "About":
         st.header("About the App")
         st.write("""
         This Heart Disease Prediction app uses machine learning models to predict the possibility of heart disease based on various health metrics.
         - Log in with username - heartdisease and Password - heart@123
-        - Upload the patient's data.
+        - Upload the patient's data once.
         - The app uses machine learning models (Extra Trees) to generate predictions.
         - Get the patient's report.
         """)
