@@ -81,10 +81,10 @@ def main():
         unsafe_allow_html=True
     )
 
-    # Create tabs for the app
-    tabs = st.tabs(["Heart Disease Prediction", "About"])
+    # Sidebar for navigation
+    option = st.sidebar.selectbox("Select a page:", ["Heart Disease Prediction", "About"])
 
-    with tabs[0]:
+    if option == "Heart Disease Prediction":
         if "logged_in" not in st.session_state:
             st.session_state.logged_in = False
 
@@ -102,6 +102,7 @@ def main():
         else:
             if st.button("Logout"):
                 st.session_state.logged_in = False
+                st.experimental_rerun()
 
             st.subheader("Upload CSV file for prediction data")
             uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
@@ -169,22 +170,18 @@ def main():
             else:
                 st.warning("Please upload a CSV file to continue.")
 
-    with tabs[1]:
+    elif option == "About":
         st.header("About the App")
-        st.write("
+        st.write("""
         This Heart Disease Prediction app uses machine learning models to predict the possibility of heart disease based on various health metrics.
         
-        - Give the patient's data.
-        - The app uses machine learning models (Extra Tree ) to generate predictions.
-        - The average prediction is used to determine if heart disease is likely.
+        - **Upload** your CSV file with patient data.
+        - The app uses a combination of machine learning models (Extra Trees, KNN, Logistic Regression) to generate predictions.
+        - The average prediction is used to determine if the person might have heart disease.
         
-        **How to use:**
-        1. Log in with the provided credentials.(username-heartdisease  Password-heart@123)
-        2. Upload the patient details
-         3. Fill out the patient details, including age, sex, and other health information.
-        4. The app will analyze the data and display a prediction.
-        ")
-    
+        This app is for educational purposes only and should not be used as a substitute for professional medical advice.
+        """)
+
 # Run the main function
 if __name__ == "__main__":
     main()
