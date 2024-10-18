@@ -60,8 +60,9 @@ def main():
         """
         <style>
         .stApp {
-            background-color: #ADD8E6;
-            height: 100vh;
+            background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20230411/pngtree-cardiac-medical-biological-background-image_2198722.jpg');
+            background-size: cover;
+            background-attachment: fixed;
             color: black;
             font-weight: bold;
         }
@@ -92,7 +93,7 @@ def main():
 
     if option == "Home":
         st.header("Welcome to the Heart Disease Prediction App! 💓")
-        st.image("https://i.pinimg.com/564x/3d/87/66/3d8766680528a0898e3fa49933c87c6d.jpg", caption="Heart Health Matters")
+        st.image("https://via.placeholder.com/600x400", caption="Heart Health Matters")
         
         st.write("""
         ### Overview
@@ -104,18 +105,29 @@ def main():
         - Allows CSV data upload for bulk predictions.
         - Generates a customized report with results.
 
-        ### How to Use:
-        1. Go to the **Heart Disease Prediction** page from the sidebar.
-        2. Log in using the credentials provided.
-        3. Upload the patient's CSV data and enter additional details.
-        4. Get the prediction results and a generated report.
+        ### Understanding Heart Disease Risk
+        Heart disease refers to several types of heart conditions, with coronary artery disease being the most common. Factors like high blood pressure, high cholesterol, smoking, and obesity significantly increase the risk of heart disease. Family history, age, and gender also play a role.
+
+        **Risk Factors:**
+        - High blood pressure and cholesterol
+        - Smoking
+        - Lack of physical activity
+        - Poor diet and excessive alcohol
+        - Obesity
+        - Diabetes
+
+        ### Protecting Your Heart:
+        1. **Exercise Regularly**: Aim for at least 30 minutes of moderate exercise most days of the week.
+        2. **Eat a Healthy Diet**: Include more fruits, vegetables, whole grains, and healthy fats like omega-3 fatty acids.
+        3. **Quit Smoking**: Smoking is one of the leading causes of heart disease. Quitting helps improve heart health rapidly.
+        4. **Manage Stress**: Chronic stress can raise blood pressure. Practice relaxation techniques like meditation or yoga.
+        5. **Regular Health Check-ups**: Get regular screenings for blood pressure, cholesterol, and diabetes.
+        6. **Maintain a Healthy Weight**: Reducing obesity reduces the risk of heart disease significantly.
+
         """)
         
-        st.subheader("Why Heart Disease Prediction Matters?")
-        st.write("""
-        Heart disease is one of the leading causes of death worldwide. Early detection of heart disease can save lives by allowing patients to receive treatment sooner. With this app, healthcare professionals and individuals can assess the risk and take necessary actions for better heart health.
-        """)
-        
+        st.image("https://th.bing.com/th/id/OIP.oZ0lj1ievuvwNl-dLzNISwHaFs?rs=1&pid=ImgDetMain", caption="Prevention is Better than Cure")
+
         st.info("Login with **username**: `heartdisease` and **password**: `heart@123` to start using the app.")
 
     elif option == "Heart Disease Prediction":
@@ -134,10 +146,10 @@ def main():
                 else:
                     st.error("❌ Invalid credentials")
         else:
-            st.subheader("Upload CSV file for prediction data (first time only)")
+            st.subheader("Upload CSV file for prediction data")
             
             # "Back to Home" button
-            if st.button("🔙 Back to Home"):
+            if st.button("🔙 Back"):
                 st.experimental_set_query_params(page="Home")
                 return
 
