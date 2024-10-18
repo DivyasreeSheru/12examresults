@@ -82,8 +82,8 @@ def main():
         
         st.image("https://cdn.pixabay.com/photo/2023/09/05/08/02/earth-8234588_1280.jpg", caption="Heart Health Matters")
         
-        st.write("""
-        ### Overview
+        st.write(""" 
+        ### Overview 
         This app uses machine learning models to predict the risk of heart disease based on several health metrics. It allows you to upload patient data, generate predictions, and provides a detailed report.
 
         ### Features:
@@ -92,7 +92,7 @@ def main():
         - Allows CSV data upload for bulk predictions.
         - Generates a customized report with results.
 
-        ### Understanding Heart Disease Risk
+        ### Understanding Heart Disease Risk 
         Heart disease refers to several types of heart conditions, with coronary artery disease being the most common. Factors like high blood pressure, high cholesterol, smoking, and obesity significantly increase the risk of heart disease. Family history, age, and gender also play a role.
 
         **Risk Factors:**
@@ -208,6 +208,14 @@ def main():
                     }
                     report_image = generate_image(values, result, "ML")
                     st.image(report_image, caption='Heart Disease Prediction Report', use_column_width=True)
+
+                    # Add a download button for the report
+                    st.download_button(
+                        label="Download Report as PNG",
+                        data=report_image,
+                        file_name='heart_disease_prediction_report.png',
+                        mime='image/png'
+                    )
             else:
                 st.error("❌ No matching data found for the entered values.")
 
