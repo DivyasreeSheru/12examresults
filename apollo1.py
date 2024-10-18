@@ -177,6 +177,7 @@ def main():
         - log in with username - heartdisease and Password - heart@123
         - Upload the patient's data.
         - The app uses machine learning models (Extra Trees)to generate predictions.
+        - Get the patient's report .
         """)
 
 # Run the main function
