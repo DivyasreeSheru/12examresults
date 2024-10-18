@@ -102,7 +102,9 @@ def main():
         else:
             if st.button("Logout"):
                 st.session_state.logged_in = False
-                st.experimental_rerun()
+                # Redirect to login screen without rerunning the app
+                st.experimental_set_query_params(page="Heart Disease Prediction")
+                return
 
             st.subheader("Upload CSV file for prediction data")
             uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
@@ -174,10 +176,10 @@ def main():
         st.header("About the App")
         st.write("""
         This Heart Disease Prediction app uses machine learning models to predict the possibility of heart disease based on various health metrics.
-        - log in with username - heartdisease and Password - heart@123
+        - Log in with username - heartdisease and Password - heart@123
         - Upload the patient's data.
-        - The app uses machine learning models (Extra Trees)to generate predictions.
-        - Get the patient's report .
+        - The app uses machine learning models (Extra Trees) to generate predictions.
+        - Get the patient's report.
         """)
 
 # Run the main function
