@@ -52,7 +52,7 @@ def login(username, password):
 
 # Main app function
 def main():
-    st.title("🌟 Heart Disease Prediction 🌟")
+    st.title(" Heart Disease Prediction ")
 
     st.markdown(
         """
@@ -122,21 +122,21 @@ def main():
             st.session_state.logged_in = False
 
         if not st.session_state.logged_in:
-            st.subheader("🔑 Login to Continue")
+            st.subheader(" Login to Continue")
             username = st.text_input("Username", placeholder="Enter Username")
             password = st.text_input("Password", type="password", placeholder="Enter Password")
 
             if st.button("Login"):
                 if login(username, password):
                     st.session_state.logged_in = True
-                    st.success("🎉 Logged in successfully!")
+                    st.success(" Logged in successfully!")
                 else:
                     st.error("❌ Invalid credentials")
         else:
             st.subheader("Upload CSV file for prediction data")
             
             # "Back to Home" button
-            if st.button("🔙 Back"):
+            if st.button("Back"):
                 st.experimental_set_query_params(page="Home")
                 return
 
@@ -157,7 +157,7 @@ def main():
 
             df = st.session_state.df  # Use the data from session state
 
-            st.subheader("🏥 Enter Patient Details")
+            st.subheader("Enter Patient Details")
             name = st.text_input("Patient Name", placeholder="Enter patient's full name") 
             age = st.number_input("Age", min_value=1, max_value=100)
             sex = st.selectbox("Sex", ["Male", "Female"])
