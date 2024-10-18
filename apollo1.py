@@ -86,7 +86,7 @@ def main():
 
     if option == "Home":
         st.header("Welcome to the Heart Disease Prediction App! 💓")
-        st.image("https://via.placeholder.com/600x400", caption="Heart Health Matters")
+        st.image("https://i.pinimg.com/564x/b8/c2/fe/b8c2fe7aa3072d5de1f88f791a50598d.jpg", caption="Heart Health Matters")
         
         st.write("""
         ### Overview
