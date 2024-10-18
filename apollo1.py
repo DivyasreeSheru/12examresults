@@ -106,6 +106,11 @@ def main():
             else:
                 st.error("❌ Invalid credentials")
     else:
+        # Add a logout button
+        if st.button("Logout"):
+            st.session_state.logged_in = False
+            st.experimental_rerun()
+
         # File upload after login
         st.subheader("Upload CSV file for prediction data")
         uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
@@ -134,16 +139,14 @@ def main():
             ca = st.number_input("Major Vessels (ca)", min_value=0.0, max_value=4.0)
             thal = st.number_input("Thalassemia (thal)", min_value=1.0, max_value=3.0)
 
-
             # Validate that the patient name is provided
             if not name.strip():
                 st.error("❌ Please enter the patient's name.")
                 return
-                
 
             # Match the patient data with the CSV for prediction
-            filtered_data = df[(df['age'] == age) &
-                               (df['sex'] == (1 if sex == "Male" else 0)) &
+            filtered_data = df[(df['age'] == age) & 
+                               (df['sex'] == (1 if sex == "Male" else 0)) & 
                                (df['cp'] == cp)]
             if not filtered_data.empty:
                 extra_trees_pred = filtered_data['Extra Trees Pred Target'].values[0]
