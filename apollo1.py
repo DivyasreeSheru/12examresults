@@ -58,7 +58,7 @@ def main():
         """
         <style>
         .stApp {
-            background-image: url('https://img.freepik.com/premium-photo/white-background-white-texture-background-banner-pattern-texture-abstract-clean-grunge-white_873925-75054.jpg');
+            background-image: url('https://img.freepik.com/premium-photo/blur-short-white-hospital-walkway-background_7180-2422.jpg');
             background-size: cover;
             background-attachment: fixed;
             color: black;
