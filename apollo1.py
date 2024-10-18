@@ -60,7 +60,7 @@ def main():
         """
         <style>
         .stApp {
-            background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20230411/pngtree-cardiac-medical-biological-background-image_2198722.jpg');
+            background-image: url('https://img.freepik.com/premium-photo/white-background-white-texture-background-banner-pattern-texture-abstract-clean-grunge-white_873925-75054.jpg');
             background-size: cover;
             background-attachment: fixed;
             color: black;
