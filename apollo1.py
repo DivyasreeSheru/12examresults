@@ -113,7 +113,7 @@ def main():
 
         """)
         
-        st.image("https://th.bing.com/th/id/OIP.0Rtz6gR6tT84e_p-FyV43AHaEK?rs=1&pid=ImgDetMain", caption="Prevention is Better than Cure")
+    
 
         st.info("Login with **username**: `heartdisease` and **password**: `heart@123` to start using the app.")
 
