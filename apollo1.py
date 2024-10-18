@@ -6,7 +6,7 @@ import io
 
 # Function to generate an image with the prediction report
 def generate_image(values, result, name):
-    img = Image.new('RGB', (600, 800), color=(224, 247, 250))
+    img = Image.new('RGB', (600, 800), color=(255, 255, 255))  # Change background color to white
     d = ImageDraw.Draw(img)
 
     try:
