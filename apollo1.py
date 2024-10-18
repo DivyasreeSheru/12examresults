@@ -171,7 +171,7 @@ def main():
 
     with tabs[1]:
         st.header("About the App")
-        st.write("""
+        st.write("
         This Heart Disease Prediction app uses machine learning models to predict the possibility of heart disease based on various health metrics.
         
         - Give the patient's data.
@@ -183,7 +183,7 @@ def main():
         2. Upload the patient details
          3. Fill out the patient details, including age, sex, and other health information.
         4. The app will analyze the data and display a prediction.
-        """)
+        ")
     
 # Run the main function
 if __name__ == "__main__":
