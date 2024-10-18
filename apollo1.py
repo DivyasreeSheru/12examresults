@@ -80,7 +80,7 @@ def main():
 
     if option == "Home":
         st.header("Welcome to ❤️ Disease Prediction Web ")
-        st.image("https://img.freepik.com/premium-photo/heart-is-chart-with-stethoscope-stethoscope_131346-6087.jpg", caption="Heart Health Matters")
+        st.image("https://cdn.pixabay.com/photo/2023/09/05/08/02/earth-8234588_1280.jpg", caption="Heart Health Matters")
         
         st.write("""
         ### Overview
