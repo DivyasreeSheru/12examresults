@@ -141,7 +141,7 @@ def main():
                 return
 
             if "uploaded_file" not in st.session_state:
-                uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
+                uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
                 if uploaded_file is not None:
                     try:
@@ -211,7 +211,7 @@ def main():
 
                     # Add a download button for the report
                     st.download_button(
-                        label="Download Report as PNG",
+                        label="Download Report",
                         data=report_image,
                         file_name='heart_disease_prediction_report.png',
                         mime='image/png'
