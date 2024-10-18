@@ -174,12 +174,9 @@ def main():
         st.header("About the App")
         st.write("""
         This Heart Disease Prediction app uses machine learning models to predict the possibility of heart disease based on various health metrics.
-        
-        - **Upload** your CSV file with patient data.
-        - The app uses a combination of machine learning models (Extra Trees, KNN, Logistic Regression) to generate predictions.
-        - The average prediction is used to determine if the person might have heart disease.
-        
-        This app is for educational purposes only and should not be used as a substitute for professional medical advice.
+        - log in with username - heartdisease and Password - heart@123
+        - Upload the patient's data.
+        - The app uses machine learning models (Extra Trees)to generate predictions.
         """)
 
 # Run the main function
