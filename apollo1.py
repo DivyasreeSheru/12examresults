@@ -82,9 +82,37 @@ def main():
     )
 
     # Sidebar for navigation
-    option = st.sidebar.selectbox("Select a page:", ["Heart Disease Prediction", "About"])
+    option = st.sidebar.selectbox("Select a page:", ["Home", "Heart Disease Prediction", "About"])
 
-    if option == "Heart Disease Prediction":
+    if option == "Home":
+        st.header("Welcome to the Heart Disease Prediction App! 💓")
+        st.image("https://via.placeholder.com/600x400", caption="Heart Health Matters")
+        
+        st.write("""
+        ### Overview
+        This app uses machine learning models to predict the risk of heart disease based on several health metrics. It allows you to upload patient data, generate predictions, and provides a detailed report.
+
+        ### Features:
+        - Predicts heart disease based on various health metrics.
+        - Supports multiple machine learning models for better accuracy.
+        - Allows CSV data upload for bulk predictions.
+        - Generates a customized report with results.
+
+        ### How to Use:
+        1. Go to the **Heart Disease Prediction** page from the sidebar.
+        2. Log in using the credentials provided.
+        3. Upload the patient's CSV data and enter additional details.
+        4. Get the prediction results and a generated report.
+        """)
+        
+        st.subheader("Why Heart Disease Prediction Matters?")
+        st.write("""
+        Heart disease is one of the leading causes of death worldwide. Early detection of heart disease can save lives by allowing patients to receive treatment sooner. With this app, healthcare professionals and individuals can assess the risk and take necessary actions for better heart health.
+        """)
+        
+        st.info("Login with **username**: `heartdisease` and **password**: `heart@123` to start using the app.")
+
+    elif option == "Heart Disease Prediction":
         if "logged_in" not in st.session_state:
             st.session_state.logged_in = False
 
