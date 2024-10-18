@@ -81,90 +81,110 @@ def main():
         unsafe_allow_html=True
     )
 
-    if "logged_in" not in st.session_state:
-        st.session_state.logged_in = False
+    # Create tabs for the app
+    tabs = st.tabs(["Heart Disease Prediction", "About"])
 
-    if not st.session_state.logged_in:
-        st.subheader("🔑 Login to Continue")
-        username = st.text_input("Username", placeholder="Enter Username")
-        password = st.text_input("Password", type="password", placeholder="Enter Password")
-
-        if st.button("Login"):
-            if login(username, password):
-                st.session_state.logged_in = True
-                st.success("🎉 Logged in successfully!")
-            else:
-                st.error("❌ Invalid credentials")
-    else:
-        if st.button("Logout"):
+    with tabs[0]:
+        if "logged_in" not in st.session_state:
             st.session_state.logged_in = False
 
-        st.subheader("Upload CSV file for prediction data")
-        uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
+        if not st.session_state.logged_in:
+            st.subheader("🔑 Login to Continue")
+            username = st.text_input("Username", placeholder="Enter Username")
+            password = st.text_input("Password", type="password", placeholder="Enter Password")
 
-        if uploaded_file is not None:
-            try:
-                df = pd.read_csv(uploaded_file)
-            except Exception as e:
-                st.error(f"Error reading the file: {e}")
-                return
-
-            st.subheader("🏥 Enter Patient Details")
-            name = st.text_input("Patient Name", placeholder="Enter patient's full name") 
-            age = st.number_input("Age", min_value=1, max_value=100)
-            sex = st.selectbox("Sex", ["Male", "Female"])
-            cp = st.number_input("Chest Pain Type (cp)", min_value=0.0, max_value=5.0)
-            trestbps = st.number_input("Resting Blood Pressure (trestbps)", min_value=94.0, max_value=200.0)
-            chol = st.number_input("Serum Cholesterol (chol)", min_value=126.0, max_value=417.0)
-            fbs = st.number_input("Fasting Blood Sugar (fbs)", min_value=0.0, max_value=3.0)
-            restecg = st.number_input("Resting ECG (restecg)", min_value=0.0, max_value=2.0)
-            thalach = st.number_input("Max Heart Rate (thalach)", min_value=71.0, max_value=192.0)
-            exang = st.number_input("Exercise Induced Angina (exang)", min_value=0.0, max_value=1.0)
-            oldpeak = st.number_input("ST Depression (oldpeak)", min_value=0.0, max_value=5.6)
-            slope = st.number_input("Slope of Peak Exercise (slope)", min_value=0.0, max_value=2.0)
-            ca = st.number_input("Major Vessels (ca)", min_value=0.0, max_value=4.0)
-            thal = st.number_input("Thalassemia (thal)", min_value=1.0, max_value=3.0)
-
-            if not name.strip():
-                st.error("❌ Please enter the patient's name.")
-                return
-
-            filtered_data = df[(df['age'] == age) & 
-                               (df['sex'] == (1 if sex == "Male" else 0)) & 
-                               (df['cp'] == cp)]
-            if not filtered_data.empty:
-                extra_trees_pred = filtered_data['Extra Trees Pred Target'].values[0]
-                knn_pred = filtered_data['KNN Pred Target'].values[0]
-                logistic_regression_pred = filtered_data['Logistic Regression Pred Target'].values[0]
-                avg_pred = (extra_trees_pred + knn_pred + logistic_regression_pred) / 3
-
-                if st.button("Submit"):
-                    result = "❤️ Heart disease predicted, Please consult a Cardiologist" if avg_pred >= 0.5 else "💪 Person is healthy "
-                    st.success(result)
-
-                    values = {
-                        "Name": name, 
-                        "Age": age,
-                        "Sex": sex,
-                        "Chest Pain Type (cp)": cp,
-                        "Resting Blood Pressure (trestbps)": trestbps,
-                        "Serum Cholesterol (chol)": chol,
-                        "Fasting Blood Sugar (fbs)": fbs,
-                        "Resting ECG (restecg)": restecg,
-                        "Max Heart Rate (thalach)": thalach,
-                        "Exercise Induced Angina (exang)": exang,
-                        "ST Depression (oldpeak)": oldpeak,
-                        "Slope of Peak Exercise (slope)": slope,
-                        "Major Vessels (ca)": ca,
-                        "Thalassemia (thal)": thal
-                    }
-                    report_image = generate_image(values, result, "ML")
-                    st.image(report_image, caption='Heart Disease Prediction Report', use_column_width=True)
-            else:
-                st.error("❌ No matching data found for the entered values.")
+            if st.button("Login"):
+                if login(username, password):
+                    st.session_state.logged_in = True
+                    st.success("🎉 Logged in successfully!")
+                else:
+                    st.error("❌ Invalid credentials")
         else:
-            st.warning("Please upload a CSV file to continue.")
+            if st.button("Logout"):
+                st.session_state.logged_in = False
 
+            st.subheader("Upload CSV file for prediction data")
+            uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
+
+            if uploaded_file is not None:
+                try:
+                    df = pd.read_csv(uploaded_file)
+                except Exception as e:
+                    st.error(f"Error reading the file: {e}")
+                    return
+
+                st.subheader("🏥 Enter Patient Details")
+                name = st.text_input("Patient Name", placeholder="Enter patient's full name") 
+                age = st.number_input("Age", min_value=1, max_value=100)
+                sex = st.selectbox("Sex", ["Male", "Female"])
+                cp = st.number_input("Chest Pain Type (cp)", min_value=0.0, max_value=5.0)
+                trestbps = st.number_input("Resting Blood Pressure (trestbps)", min_value=94.0, max_value=200.0)
+                chol = st.number_input("Serum Cholesterol (chol)", min_value=126.0, max_value=417.0)
+                fbs = st.number_input("Fasting Blood Sugar (fbs)", min_value=0.0, max_value=3.0)
+                restecg = st.number_input("Resting ECG (restecg)", min_value=0.0, max_value=2.0)
+                thalach = st.number_input("Max Heart Rate (thalach)", min_value=71.0, max_value=192.0)
+                exang = st.number_input("Exercise Induced Angina (exang)", min_value=0.0, max_value=1.0)
+                oldpeak = st.number_input("ST Depression (oldpeak)", min_value=0.0, max_value=5.6)
+                slope = st.number_input("Slope of Peak Exercise (slope)", min_value=0.0, max_value=2.0)
+                ca = st.number_input("Major Vessels (ca)", min_value=0.0, max_value=4.0)
+                thal = st.number_input("Thalassemia (thal)", min_value=1.0, max_value=3.0)
+
+                if not name.strip():
+                    st.error("❌ Please enter the patient's name.")
+                    return
+
+                filtered_data = df[(df['age'] == age) & 
+                                   (df['sex'] == (1 if sex == "Male" else 0)) & 
+                                   (df['cp'] == cp)]
+                if not filtered_data.empty:
+                    extra_trees_pred = filtered_data['Extra Trees Pred Target'].values[0]
+                    knn_pred = filtered_data['KNN Pred Target'].values[0]
+                    logistic_regression_pred = filtered_data['Logistic Regression Pred Target'].values[0]
+                    avg_pred = (extra_trees_pred + knn_pred + logistic_regression_pred) / 3
+
+                    if st.button("Submit"):
+                        result = "❤️ Heart disease predicted, Please consult a Cardiologist" if avg_pred >= 0.5 else "💪 Person is healthy "
+                        st.success(result)
+
+                        values = {
+                            "Name": name, 
+                            "Age": age,
+                            "Sex": sex,
+                            "Chest Pain Type (cp)": cp,
+                            "Resting Blood Pressure (trestbps)": trestbps,
+                            "Serum Cholesterol (chol)": chol,
+                            "Fasting Blood Sugar (fbs)": fbs,
+                            "Resting ECG (restecg)": restecg,
+                            "Max Heart Rate (thalach)": thalach,
+                            "Exercise Induced Angina (exang)": exang,
+                            "ST Depression (oldpeak)": oldpeak,
+                            "Slope of Peak Exercise (slope)": slope,
+                            "Major Vessels (ca)": ca,
+                            "Thalassemia (thal)": thal
+                        }
+                        report_image = generate_image(values, result, "ML")
+                        st.image(report_image, caption='Heart Disease Prediction Report', use_column_width=True)
+                else:
+                    st.error("❌ No matching data found for the entered values.")
+            else:
+                st.warning("Please upload a CSV file to continue.")
+
+    with tabs[1]:
+        st.header("About the App")
+        st.write("""
+        This Heart Disease Prediction app uses machine learning models to predict the possibility of heart disease based on various health metrics.
+        
+        - Give the patient's data.
+        - The app uses machine learning models (Extra Tree ) to generate predictions.
+        - The average prediction is used to determine if heart disease is likely.
+        
+        **How to use:**
+        1. Log in with the provided credentials.(username-heartdisease  Password-heart@123)
+        2. Upload the patient details
+         3. Fill out the patient details, including age, sex, and other health information.
+        4. The app will analyze the data and display a prediction.
+        """)
+    
 # Run the main function
 if __name__ == "__main__":
     main()
