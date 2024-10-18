@@ -20,8 +20,6 @@ def generate_image(values, result, name):
     heart_points = [(300, 220), (350, 170), (400, 220), (400, 280), (300, 380), (200, 280), (200, 220)]
     d.polygon(heart_points, fill=heart_color)
 
-    d.text((250, 20), "+", font=large_font, fill=(0, 0, 0))
-
     title_text = "Heart Disease Prediction Report"
     underline_text = "-" * 50
     title_bbox = d.textbbox((0, 0), title_text, font=font)
@@ -66,18 +64,7 @@ def main():
             color: black;
             font-weight: bold;
         }
-        .plus-symbol {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 850px;
-            font-weight: bold;
-            color: rgba(255, 0, 0, 0.1);
-            z-index: 1;
-        }
         </style>
-        <div class="plus-symbol">+</div>
         """,
         unsafe_allow_html=True
     )
