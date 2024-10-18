@@ -6,7 +6,7 @@ import io
 
 # Function to generate an image with the prediction report
 def generate_image(values, result, name):
-    img = Image.new('RGB', (600, 800), color=(255, 255, 255))  # Change background color to white
+    img = Image.new('RGB', (600, 800), color=(255, 255, 255))  
     d = ImageDraw.Draw(img)
 
     try:
@@ -133,7 +133,7 @@ def main():
                 else:
                     st.error("❌ Invalid credentials")
         else:
-            st.subheader("Upload CSV file for prediction data")
+            st.subheader("Upload CSV file")
             
             # "Back to Home" button
             if st.button("Back"):
