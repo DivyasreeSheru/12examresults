@@ -82,11 +82,17 @@ def main():
     )
 
     # Sidebar for navigation
-    option = st.sidebar.selectbox("Select a page:", ["Home", "Heart Disease Prediction", "About"])
+    option = st.sidebar.selectbox("Select a page:", ["Home", "Heart Disease Prediction", "About", "Logout"])
+
+    if option == "Logout":
+        st.session_state.logged_in = False
+        st.experimental_set_query_params(page="Home")
+        st.success("Logged out successfully.")
+        return
 
     if option == "Home":
         st.header("Welcome to the Heart Disease Prediction App! 💓")
-        st.image("https://i.pinimg.com/564x/b8/c2/fe/b8c2fe7aa3072d5de1f88f791a50598d.jpg", caption="Heart Health Matters")
+        st.image("https://i.pinimg.com/564x/3d/87/66/3d8766680528a0898e3fa49933c87c6d.jpg", caption="Heart Health Matters")
         
         st.write("""
         ### Overview
@@ -128,13 +134,12 @@ def main():
                 else:
                     st.error("❌ Invalid credentials")
         else:
-            if st.button("Logout"):
-                st.session_state.logged_in = False
-                # Redirect to login screen without rerunning the app
-                st.experimental_set_query_params(page="Heart Disease Prediction")
-                return
-
             st.subheader("Upload CSV file for prediction data (first time only)")
+            
+            # "Back to Home" button
+            if st.button("🔙 Back to Home"):
+                st.experimental_set_query_params(page="Home")
+                return
 
             if "uploaded_file" not in st.session_state:
                 uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
