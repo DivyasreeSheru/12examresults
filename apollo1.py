@@ -79,8 +79,8 @@ def main():
         return
 
     if option == "Home":
-        st.header("Welcome to the Heart Disease Prediction App! 💓")
-        st.image("https://via.placeholder.com/600x400", caption="Heart Health Matters")
+        st.header("Welcome to ❤️ Disease Prediction Web ")
+        st.image("https://images.ctfassets.net/yixw23k2v6vo/g41mddSM6cGeSA2WqUIYO/02ac16c4ccfac01a1c92872048b95a48/iStock-619054366-promo.jpg", caption="Heart Health Matters")
         
         st.write("""
         ### Overview
@@ -113,7 +113,7 @@ def main():
 
         """)
         
-        st.image("https://th.bing.com/th/id/OIP.oZ0lj1ievuvwNl-dLzNISwHaFs?rs=1&pid=ImgDetMain", caption="Prevention is Better than Cure")
+        st.image("https://cdn.pixabay.com/photo/2023/09/05/08/02/earth-8234588_1280.jpg", caption="Prevention is Better than Cure")
 
         st.info("Login with **username**: `heartdisease` and **password**: `heart@123` to start using the app.")
 
