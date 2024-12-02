@@ -188,7 +188,7 @@ def main():
             trestbps = st.number_input("Resting Blood Pressure (trestbps)", min_value=94.0, max_value=200.0)
             chol = st.number_input("Serum Cholesterol (chol)", min_value=126.0, max_value=417.0)
             thalach = st.number_input("Max Heart Rate (thalach)", min_value=71.0, max_value=192.0)
-            old peak = st.number_input("ST Depression (oldpeak)", min_value=0.0, max_value=5.6)
+            oldpeak = st.number_input("ST Depression (oldpeak)", min_value=0.0, max_value=5.6)
             slope = st.number_input("Slope of Peak Exercise (slope)", min_value=0.0, max_value=2.0)
             thal = st.number_input("Thalassemia (thal)", min_value=1.0, max_value=3.0)
 
