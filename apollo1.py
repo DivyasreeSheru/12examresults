@@ -54,7 +54,7 @@ def login(username, password):
 
 # Main app function
 def main():
-    st.title(" Heart Disease Prediction ")
+    st.title("Heart Disease Prediction")
 
     st.markdown(
         """
@@ -81,7 +81,6 @@ def main():
         return
 
     if option == "Home":
-        
         st.image("https://cdn.pixabay.com/photo/2023/09/05/08/02/earth-8234588_1280.jpg", caption="Heart Health Matters")
         
         st.write(""" 
@@ -112,11 +111,8 @@ def main():
         4. **Manage Stress**: Chronic stress can raise blood pressure. Practice relaxation techniques like meditation or yoga.
         5. **Regular Health Check-ups**: Get regular screenings for blood pressure, cholesterol, and diabetes.
         6. **Maintain a Healthy Weight**: Reducing obesity reduces the risk of heart disease significantly.
-
         """)
-        
     
-
         st.info("Login with **username**: `heartdisease` and **password**: `heart@123` to start using the app.")
 
     elif option == "Heart Disease Prediction":
@@ -124,14 +120,14 @@ def main():
             st.session_state.logged_in = False
 
         if not st.session_state.logged_in:
-            st.subheader(" Login to Continue")
+            st.subheader("Login to Continue")
             username = st.text_input("Username", placeholder="Enter Username")
             password = st.text_input("Password", type="password", placeholder="Enter Password")
 
             if st.button("Login"):
                 if login(username, password):
                     st.session_state.logged_in = True
-                    st.success(" Logged in successfully!")
+                    st.success("Logged in successfully!")
                 else:
                     st.error("❌ Invalid credentials")
         else:
@@ -184,12 +180,9 @@ def main():
                                (df['cp'] == cp)]
             if not filtered_data.empty:
                 extra_trees_pred = filtered_data['Extra Trees Pred Target'].values[0]
-                knn_pred = filtered_data['KNN Pred Target'].values[0]
-                logistic_regression_pred = filtered_data['Logistic Regression Pred Target'].values[0]
-                avg_pred = (extra_trees_pred + knn_pred + logistic_regression_pred) / 3
 
                 if st.button("Submit"):
-                    result = "❤️ Heart disease predicted, Please consult a Cardiologist" if avg_pred >= 0.5 else "💪 Person is healthy "
+                    result = "❤️ Heart disease predicted, Please consult a Cardiologist" if extra_trees_pred >= 0.5 else "💪 Person is healthy "
                     st.success(result)
 
                     values = {
@@ -223,14 +216,14 @@ def main():
 
     elif option == "About":
         st.header("About the App")
-        st.write("""
+        st.write(""" 
         This Heart Disease Prediction app uses machine learning models to predict the possibility of heart disease based on various health metrics.
         - Log in with username - heartdisease and Password - heart@123
         - Upload the patient's data once.
-        - The app uses machine learning models (Extra Trees) to generate predictions.
+        - The app uses Extra Trees Classifier to generate predictions.
         - Get the patient's report.
         """)
-
+  
 # Run the main function
 if __name__ == "__main__":
-    main()       
+    main()
