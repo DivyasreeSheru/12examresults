@@ -131,7 +131,7 @@ def main():
                 else:
                     st.error("❌ Invalid credentials")
         else:
-            st.subheader("Upload CSV file")
+            st.subheader("CSV file")
             
             # "Back to Home" button
             if st.button("Back"):
