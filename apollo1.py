@@ -139,7 +139,7 @@ def main():
                 return
 
             if "uploaded_file" not in st.session_state:
-                uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
+                uploaded_file = st.file_uploader("CSV file", type=["csv"])
 
                 if uploaded_file is not None:
                     try:
